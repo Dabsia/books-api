@@ -1,6 +1,8 @@
 import express from "express";
-import { createUser } from "./controllers/user.js";
 import connectDB from "./db.js";
+import bookRouter from "./routers/books.routes.js";
+import userRouter from "./routers/user.routes.js";
+import adminRouter from "./routers/admin.routes.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -8,8 +10,15 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(express.json());
 
-// User route
-app.post("/api/users", createUser);
+// User routes
+app.use("/api", userRouter); // Use the user router for user routesz
+app.use("/api", bookRouter); // Use the book router for book routes
+app.use("/api", adminRouter); // Use the admin router for admin routes
+
+// Health check route
+app.get("/api/health", (req, res) => {
+  res.status(200).json({ status: "OK", message: "API is healthy" });
+});
 
 // Start server with database connection
 const startServer = async () => {

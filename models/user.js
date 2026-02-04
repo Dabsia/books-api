@@ -4,9 +4,7 @@ const userSchema = new mongoose.Schema({
   name: String,
   password: String,
   email: String,
-  age: Number,
-  isActive: Boolean,
-  tags: [String],
+  role: { type: String, enum: ["user", "admin"], default: "user" },
   createdAt: { type: Date, default: Date.now() },
 });
 
