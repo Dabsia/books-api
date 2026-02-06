@@ -3,6 +3,7 @@ import connectDB from "./db.js";
 import bookRouter from "./routers/books.routes.js";
 import userRouter from "./routers/user.routes.js";
 import adminRouter from "./routers/admin.routes.js";
+import imageRouter from "./routers/image.routes.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use("/api", userRouter); // Use the user router for user routesz
 app.use("/api", bookRouter); // Use the book router for book routes
 app.use("/api", adminRouter); // Use the admin router for admin routes
+app.use("/api", imageRouter); // Use the image router for image upload routes
 
 // Health check route
 app.get("/api/health", (req, res) => {
